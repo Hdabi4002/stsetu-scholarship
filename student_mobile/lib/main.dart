@@ -4,7 +4,9 @@ const navy = Color(0xFF123B5D);
 const green = Color(0xFF168A68);
 const bg = Color(0xFFF5F8FA);
 
-void main() => runApp(const STSetuApp());
+void main() {
+  runApp(const STSetuApp());
+}
 
 class STSetuApp extends StatelessWidget {
   const STSetuApp({super.key});
@@ -24,6 +26,10 @@ class STSetuApp extends StatelessWidget {
     );
   }
 }
+
+// ============================================================
+// LOGIN PAGE
+// ============================================================
 
 class LoginPage extends StatelessWidget {
   const LoginPage({super.key});
@@ -50,7 +56,9 @@ class LoginPage extends StatelessWidget {
                     size: 38,
                   ),
                 ),
+
                 const SizedBox(height: 16),
+
                 const Text(
                   'STSetu',
                   style: TextStyle(
@@ -59,11 +67,14 @@ class LoginPage extends StatelessWidget {
                     color: navy,
                   ),
                 ),
+
                 const Text(
                   'Unified Scholarship Platform',
                   style: TextStyle(color: Colors.black54),
                 ),
+
                 const SizedBox(height: 30),
+
                 Card(
                   child: Padding(
                     padding: const EdgeInsets.all(22),
@@ -77,12 +88,16 @@ class LoginPage extends StatelessWidget {
                             fontWeight: FontWeight.bold,
                           ),
                         ),
+
                         const SizedBox(height: 6),
+
                         const Text(
                           'SIH demonstration mode • Prototype data only',
                           style: TextStyle(color: Colors.black54),
                         ),
+
                         const SizedBox(height: 20),
+
                         const TextField(
                           decoration: InputDecoration(
                             labelText: 'Mobile / Student ID',
@@ -90,7 +105,9 @@ class LoginPage extends StatelessWidget {
                             border: OutlineInputBorder(),
                           ),
                         ),
+
                         const SizedBox(height: 14),
+
                         const TextField(
                           decoration: InputDecoration(
                             labelText: 'OTP',
@@ -98,7 +115,9 @@ class LoginPage extends StatelessWidget {
                             border: OutlineInputBorder(),
                           ),
                         ),
+
                         const SizedBox(height: 20),
+
                         SizedBox(
                           width: double.infinity,
                           child: FilledButton(
@@ -112,7 +131,9 @@ class LoginPage extends StatelessWidget {
                             },
                             child: const Padding(
                               padding: EdgeInsets.all(14),
-                              child: Text('Enter Student Dashboard'),
+                              child: Text(
+                                'Enter Student Dashboard',
+                              ),
                             ),
                           ),
                         ),
@@ -120,7 +141,9 @@ class LoginPage extends StatelessWidget {
                     ),
                   ),
                 ),
+
                 const SizedBox(height: 18),
+
                 const Text(
                   'React + Vite Admin Portal • FastAPI-compatible architecture',
                   style: TextStyle(
@@ -138,6 +161,10 @@ class LoginPage extends StatelessWidget {
   }
 }
 
+// ============================================================
+// MAIN SHELL
+// ============================================================
+
 class Shell extends StatefulWidget {
   const Shell({super.key});
 
@@ -148,7 +175,7 @@ class Shell extends StatefulWidget {
 class _ShellState extends State<Shell> {
   int index = 0;
 
-  final pages = const [
+  final List<Widget> pages = const [
     DashboardPage(),
     SchemesPage(),
     ApplicationsPage(),
@@ -175,28 +202,40 @@ class _ShellState extends State<Shell> {
                 size: 21,
               ),
             ),
+
             const SizedBox(width: 10),
+
             const Text(
               'STSetu',
-              style: TextStyle(fontWeight: FontWeight.w800),
+              style: TextStyle(
+                fontWeight: FontWeight.w800,
+              ),
             ),
           ],
         ),
+
         actions: [
           IconButton(
             onPressed: () => showJago(context),
             icon: const Icon(Icons.auto_awesome),
           ),
+
           IconButton(
             onPressed: () => showProfile(context),
             icon: const Icon(Icons.person_outline),
           ),
         ],
       ),
+
       body: pages[index],
+
       bottomNavigationBar: NavigationBar(
         selectedIndex: index,
-        onDestinationSelected: (v) => setState(() => index = v),
+        onDestinationSelected: (value) {
+          setState(() {
+            index = value;
+          });
+        },
         destinations: const [
           NavigationDestination(
             icon: Icon(Icons.home_outlined),
@@ -224,11 +263,15 @@ class _ShellState extends State<Shell> {
   }
 }
 
+// ============================================================
+// DASHBOARD
+// ============================================================
+
 class DashboardPage extends StatelessWidget {
   const DashboardPage({super.key});
 
   @override
-  Widget build(BuildContext c) {
+  Widget build(BuildContext context) {
     return ListView(
       padding: const EdgeInsets.all(16),
       children: [
@@ -249,7 +292,9 @@ class DashboardPage extends StatelessWidget {
                   fontWeight: FontWeight.bold,
                 ),
               ),
+
               SizedBox(height: 8),
+
               Text(
                 'Welcome, Student ABC 👋',
                 style: TextStyle(
@@ -258,7 +303,9 @@ class DashboardPage extends StatelessWidget {
                   fontWeight: FontWeight.w800,
                 ),
               ),
+
               SizedBox(height: 8),
+
               Text(
                 'Discover schemes, check eligibility, verify documents and track your scholarship journey.',
                 style: TextStyle(
@@ -269,7 +316,9 @@ class DashboardPage extends StatelessWidget {
             ],
           ),
         ),
+
         const SizedBox(height: 16),
+
         Row(
           children: [
             metric('5', 'Schemes'),
@@ -277,8 +326,11 @@ class DashboardPage extends StatelessWidget {
             metric('3/3', 'Docs'),
           ],
         ),
+
         const SizedBox(height: 18),
+
         section('Application status'),
+
         Card(
           child: Padding(
             padding: const EdgeInsets.all(18),
@@ -296,8 +348,11 @@ class DashboardPage extends StatelessWidget {
             ),
           ),
         ),
+
         const SizedBox(height: 18),
+
         section('Quick services'),
+
         GridView.count(
           crossAxisCount: 2,
           shrinkWrap: true,
@@ -305,10 +360,22 @@ class DashboardPage extends StatelessWidget {
           crossAxisSpacing: 10,
           mainAxisSpacing: 10,
           children: [
-            quick(Icons.verified_user_outlined, 'Check Eligibility'),
-            quick(Icons.folder_shared_outlined, 'Document Wallet'),
-            quick(Icons.notifications_none, 'Notifications'),
-            quick(Icons.smart_toy_outlined, 'JAGO AI'),
+            quick(
+              Icons.verified_user_outlined,
+              'Check Eligibility',
+            ),
+            quick(
+              Icons.folder_shared_outlined,
+              'Document Wallet',
+            ),
+            quick(
+              Icons.notifications_none,
+              'Notifications',
+            ),
+            quick(
+              Icons.smart_toy_outlined,
+              'JAGO AI',
+            ),
           ],
         ),
       ],
@@ -316,7 +383,11 @@ class DashboardPage extends StatelessWidget {
   }
 }
 
-Widget metric(String n, String l) {
+// ============================================================
+// COMMON WIDGETS
+// ============================================================
+
+Widget metric(String number, String label) {
   return Expanded(
     child: Card(
       child: Padding(
@@ -324,15 +395,16 @@ Widget metric(String n, String l) {
         child: Column(
           children: [
             Text(
-              n,
+              number,
               style: const TextStyle(
                 fontSize: 20,
                 fontWeight: FontWeight.bold,
                 color: navy,
               ),
             ),
+
             Text(
-              l,
+              label,
               style: const TextStyle(
                 fontSize: 11,
                 color: Colors.black54,
@@ -345,11 +417,11 @@ Widget metric(String n, String l) {
   );
 }
 
-Widget section(String s) {
+Widget section(String title) {
   return Padding(
     padding: const EdgeInsets.only(bottom: 8),
     child: Text(
-      s,
+      title,
       style: const TextStyle(
         fontSize: 17,
         fontWeight: FontWeight.bold,
@@ -358,12 +430,19 @@ Widget section(String s) {
   );
 }
 
-Widget status(String s, bool done, {bool current = false}) {
+Widget status(
+  String title,
+  bool done, {
+  bool current = false,
+}) {
   return ListTile(
     leading: CircleAvatar(
       radius: 13,
-      backgroundColor:
-          done ? green : current ? Colors.orange : Colors.black12,
+      backgroundColor: done
+          ? green
+          : current
+              ? Colors.orange
+              : Colors.black12,
       child: Icon(
         done
             ? Icons.check
@@ -374,28 +453,36 @@ Widget status(String s, bool done, {bool current = false}) {
         size: 14,
       ),
     ),
+
     title: Text(
-      s,
+      title,
       style: const TextStyle(
         fontSize: 13,
         fontWeight: FontWeight.w600,
       ),
     ),
+
     dense: true,
   );
 }
 
-Widget quick(IconData i, String s) {
+Widget quick(IconData icon, String title) {
   return Card(
     child: Padding(
       padding: const EdgeInsets.all(14),
       child: Column(
         mainAxisAlignment: MainAxisAlignment.center,
         children: [
-          Icon(i, color: green, size: 25),
+          Icon(
+            icon,
+            color: green,
+            size: 25,
+          ),
+
           const SizedBox(height: 8),
+
           Text(
-            s,
+            title,
             textAlign: TextAlign.center,
             style: const TextStyle(
               fontWeight: FontWeight.w600,
@@ -408,10 +495,14 @@ Widget quick(IconData i, String s) {
   );
 }
 
+// ============================================================
+// SCHOLARSHIP SCHEMES
+// ============================================================
+
 class SchemesPage extends StatelessWidget {
   const SchemesPage({super.key});
 
-  static const schemes = [
+  static const List<String> schemes = [
     'Post-Matric Scholarship',
     'Pre-Matric Scholarship',
     'Top Class Education',
@@ -420,38 +511,49 @@ class SchemesPage extends StatelessWidget {
   ];
 
   @override
-  Widget build(BuildContext c) {
+  Widget build(BuildContext context) {
     return ListView(
       padding: const EdgeInsets.all(16),
       children: [
         section('Scholarship Schemes'),
+
         const Text(
           'Browse the core schemes represented in the MOTA project.',
           style: TextStyle(color: Colors.black54),
         ),
+
         const SizedBox(height: 14),
+
         ...schemes.map(
-          (s) => Card(
+          (scheme) => Card(
             child: ListTile(
               leading: CircleAvatar(
-                backgroundColor: navy.withOpacity(.08),
+                backgroundColor: navy.withOpacity(0.08),
                 child: const Icon(
                   Icons.school_outlined,
                   color: navy,
                 ),
               ),
+
               title: Text(
-                s,
+                scheme,
                 style: const TextStyle(
                   fontWeight: FontWeight.bold,
                   fontSize: 14,
                 ),
               ),
+
               subtitle: const Text(
                 'Eligibility check available • Demo',
               ),
-              trailing: const Icon(Icons.chevron_right),
-              onTap: () => showEligibility(c, s),
+
+              trailing: const Icon(
+                Icons.chevron_right,
+              ),
+
+              onTap: () {
+                showEligibility(context, scheme);
+              },
             ),
           ),
         ),
@@ -460,68 +562,101 @@ class SchemesPage extends StatelessWidget {
   }
 }
 
-void showEligibility(BuildContext c, String s) {
+// ============================================================
+// ELIGIBILITY
+// ============================================================
+
+void showEligibility(
+  BuildContext context,
+  String scheme,
+) {
   showModalBottomSheet(
-    context: c,
+    context: context,
     showDragHandle: true,
-    builder: (_) => Padding(
-      padding: const EdgeInsets.all(22),
-      child: Column(
-        mainAxisSize: MainAxisSize.min,
-        crossAxisAlignment: CrossAxisAlignment.start,
-        children: [
-          Text(
-            s,
-            style: const TextStyle(
-              fontSize: 20,
-              fontWeight: FontWeight.bold,
+    builder: (_) {
+      return Padding(
+        padding: const EdgeInsets.all(22),
+        child: Column(
+          mainAxisSize: MainAxisSize.min,
+          crossAxisAlignment: CrossAxisAlignment.start,
+          children: [
+            Text(
+              scheme,
+              style: const TextStyle(
+                fontSize: 20,
+                fontWeight: FontWeight.bold,
+              ),
             ),
-          ),
-          const SizedBox(height: 8),
-          const Text(
-            'Demo profile match: ST • MCA • annual income ₹2.1L',
-          ),
-          const SizedBox(height: 15),
-          Container(
-            padding: const EdgeInsets.all(14),
-            decoration: BoxDecoration(
-              color: green.withOpacity(.1),
-              borderRadius: BorderRadius.circular(14),
+
+            const SizedBox(height: 8),
+
+            const Text(
+              'Demo profile match: ST • MCA • annual income ₹2.1L',
             ),
-            child: const Row(
-              children: [
-                Icon(Icons.check_circle, color: green),
-                SizedBox(width: 8),
-                Text(
-                  'Eligible for demonstration flow',
-                  style: TextStyle(fontWeight: FontWeight.bold),
+
+            const SizedBox(height: 15),
+
+            Container(
+              padding: const EdgeInsets.all(14),
+              decoration: BoxDecoration(
+                color: green.withOpacity(0.1),
+                borderRadius: BorderRadius.circular(14),
+              ),
+              child: const Row(
+                children: [
+                  Icon(
+                    Icons.check_circle,
+                    color: green,
+                  ),
+
+                  SizedBox(width: 8),
+
+                  Expanded(
+                    child: Text(
+                      'Eligible for demonstration flow',
+                      style: TextStyle(
+                        fontWeight: FontWeight.bold,
+                      ),
+                    ),
+                  ),
+                ],
+              ),
+            ),
+
+            const SizedBox(height: 16),
+
+            SizedBox(
+              width: double.infinity,
+              child: FilledButton(
+                onPressed: () {
+                  Navigator.pop(context);
+                },
+                child: const Text(
+                  'Start Application',
                 ),
-              ],
+              ),
             ),
-          ),
-          const SizedBox(height: 16),
-          SizedBox(
-            width: double.infinity,
-            child: FilledButton(
-              onPressed: () => Navigator.pop(c),
-              child: const Text('Start Application'),
-            ),
-          ),
-        ],
-      ),
-    ),
+          ],
+        ),
+      );
+    },
   );
 }
+
+// ============================================================
+// APPLICATIONS
+// ============================================================
 
 class ApplicationsPage extends StatelessWidget {
   const ApplicationsPage({super.key});
 
   @override
-  Widget build(BuildContext c) {
+  Widget build(BuildContext context) {
     return ListView(
       padding: const EdgeInsets.all(16),
       children: [
         section('Applications Track'),
+
         Card(
           child: Padding(
             padding: const EdgeInsets.all(18),
@@ -535,23 +670,44 @@ class ApplicationsPage extends StatelessWidget {
                     fontSize: 18,
                   ),
                 ),
+
                 const Text(
                   'Post-Matric Scholarship',
-                  style: TextStyle(color: Colors.black54),
+                  style: TextStyle(
+                    color: Colors.black54,
+                  ),
                 ),
+
                 const SizedBox(height: 15),
+
                 const Chip(
-                  label: Text('Under Verification'),
+                  label: Text(
+                    'Under Verification',
+                  ),
                 ),
+
                 const Divider(),
-                status('Application Submitted', true),
-                status('Document Verification', true),
+
+                status(
+                  'Application Submitted',
+                  true,
+                ),
+
+                status(
+                  'Document Verification',
+                  true,
+                ),
+
                 status(
                   'Institute / State Verification',
                   false,
                   current: true,
                 ),
-                status('Sanction & DBT', false),
+
+                status(
+                  'Sanction & DBT',
+                  false,
+                ),
               ],
             ),
           ),
@@ -561,33 +717,49 @@ class ApplicationsPage extends StatelessWidget {
   }
 }
 
+// ============================================================
+// DOCUMENT WALLET
+// ============================================================
+
 class DocumentsPage extends StatelessWidget {
   const DocumentsPage({super.key});
 
   @override
-  Widget build(BuildContext c) {
+  Widget build(BuildContext context) {
+    const documents = [
+      'ST Certificate',
+      'Income Certificate',
+      'Marksheet',
+    ];
+
     return ListView(
       padding: const EdgeInsets.all(16),
       children: [
         section('Document Wallet'),
+
         const Text(
           'Verified documents and DigiLocker demo integration.',
-          style: TextStyle(color: Colors.black54),
+          style: TextStyle(
+            color: Colors.black54,
+          ),
         ),
+
         const SizedBox(height: 12),
-        ...[
-          'ST Certificate',
-          'Income Certificate',
-          'Marksheet',
-        ].map(
-          (d) => Card(
+
+        ...documents.map(
+          (document) => Card(
             child: ListTile(
               leading: const Icon(
                 Icons.description_outlined,
                 color: navy,
               ),
-              title: Text(d),
-              subtitle: const Text('Verified • Demo document'),
+
+              title: Text(document),
+
+              subtitle: const Text(
+                'Verified • Demo document',
+              ),
+
               trailing: const Icon(
                 Icons.verified,
                 color: green,
@@ -595,34 +767,52 @@ class DocumentsPage extends StatelessWidget {
             ),
           ),
         ),
+
         Card(
           child: ListTile(
             leading: const Icon(
               Icons.cloud_outlined,
               color: green,
             ),
+
             title: const Text(
               'Connect DigiLocker',
-              style: TextStyle(fontWeight: FontWeight.bold),
+              style: TextStyle(
+                fontWeight: FontWeight.bold,
+              ),
             ),
+
             subtitle: const Text(
               'Mock gateway for SIH demonstration',
             ),
-            onTap: () => showDialog(
-              context: c,
-              builder: (_) => AlertDialog(
-                title: const Text('DigiLocker'),
-                content: const Text(
-                  'Demo verification completed. No live government service is connected.',
-                ),
-                actions: [
-                  TextButton(
-                    onPressed: () => Navigator.pop(c),
-                    child: const Text('Done'),
-                  ),
-                ],
-              ),
-            ),
+
+            onTap: () {
+              showDialog(
+                context: context,
+                builder: (_) {
+                  return AlertDialog(
+                    title: const Text(
+                      'DigiLocker',
+                    ),
+
+                    content: const Text(
+                      'Demo verification completed. No live government service is connected.',
+                    ),
+
+                    actions: [
+                      TextButton(
+                        onPressed: () {
+                          Navigator.pop(context);
+                        },
+                        child: const Text(
+                          'Done',
+                        ),
+                      ),
+                    ],
+                  );
+                },
+              );
+            },
           ),
         ),
       ],
@@ -630,15 +820,20 @@ class DocumentsPage extends StatelessWidget {
   }
 }
 
+// ============================================================
+// PAYMENT / DBT
+// ============================================================
+
 class PaymentsPage extends StatelessWidget {
   const PaymentsPage({super.key});
 
   @override
-  Widget build(BuildContext c) {
+  Widget build(BuildContext context) {
     return ListView(
       padding: const EdgeInsets.all(16),
       children: [
         section('Payment Tracker • DBT'),
+
         Card(
           child: Padding(
             padding: const EdgeInsets.all(20),
@@ -647,9 +842,13 @@ class PaymentsPage extends StatelessWidget {
               children: [
                 const Text(
                   'Post-Matric Scholarship',
-                  style: TextStyle(color: Colors.black54),
+                  style: TextStyle(
+                    color: Colors.black54,
+                  ),
                 ),
+
                 const SizedBox(height: 4),
+
                 const Text(
                   '₹48,000',
                   style: TextStyle(
@@ -658,25 +857,53 @@ class PaymentsPage extends StatelessWidget {
                     color: navy,
                   ),
                 ),
-                const Text('Demo annual support'),
-                const SizedBox(height: 12),
-                const Chip(
-                  avatar: Icon(Icons.schedule, size: 15),
-                  label: Text('DBT Processing'),
+
+                const Text(
+                  'Demo annual support',
                 ),
-                const Divider(height: 28),
+
+                const SizedBox(height: 12),
+
+                const Chip(
+                  avatar: Icon(
+                    Icons.schedule,
+                    size: 15,
+                  ),
+                  label: Text(
+                    'DBT Processing',
+                  ),
+                ),
+
+                const Divider(
+                  height: 28,
+                ),
+
                 const Text(
                   'Destination account  XXXX XXXX 4821',
                 ),
+
                 const SizedBox(height: 8),
-                status('Sanction generated', true),
-                status('PFMS / DBT validation', true),
+
+                status(
+                  'Sanction generated',
+                  true,
+                ),
+
+                status(
+                  'PFMS / DBT validation',
+                  true,
+                ),
+
                 status(
                   'Payment processing',
                   false,
                   current: true,
                 ),
-                status('Credit to student', false),
+
+                status(
+                  'Credit to student',
+                  false,
+                ),
               ],
             ),
           ),
@@ -686,54 +913,93 @@ class PaymentsPage extends StatelessWidget {
   }
 }
 
-void showJago(BuildContext c) {
+// ============================================================
+// JAGO AI
+// ============================================================
+
+void showJago(BuildContext context) {
   showDialog(
-    context: c,
-    builder: (_) => AlertDialog(
-      title: const Text('JAGO AI'),
-      content: const Text(
-        'Namaste! I can guide you on scholarship schemes, eligibility, required documents, application stages and DBT status.\n\nDemo answer: Based on the profile, Post-Matric Scholarship is available for an eligibility check.',
-      ),
-      actions: [
-        TextButton(
-          onPressed: () => Navigator.pop(c),
-          child: const Text('Close'),
+    context: context,
+    builder: (_) {
+      return AlertDialog(
+        title: const Text(
+          'JAGO AI',
         ),
-      ],
-    ),
+
+        content: const Text(
+          'Namaste! I can guide you on scholarship schemes, eligibility, required documents, application stages and DBT status.\n\nDemo answer: Based on the profile, Post-Matric Scholarship is available for an eligibility check.',
+        ),
+
+        actions: [
+          TextButton(
+            onPressed: () {
+              Navigator.pop(context);
+            },
+            child: const Text(
+              'Close',
+            ),
+          ),
+        ],
+      );
+    },
   );
 }
 
-void showProfile(BuildContext c) {
+// ============================================================
+// PROFILE
+// ============================================================
+
+void showProfile(BuildContext context) {
   showModalBottomSheet(
-    context: c,
+    context: context,
     showDragHandle: true,
-    builder: (_) => const Padding(
-      padding: EdgeInsets.all(24),
-      child: Column(
-        mainAxisSize: MainAxisSize.min,
-        crossAxisAlignment: CrossAxisAlignment.start,
-        children: [
-          Text(
-            'Applicant Profile',
-            style: TextStyle(
-              fontSize: 20,
-              fontWeight: FontWeight.bold,
+    builder: (_) {
+      return const Padding(
+        padding: EdgeInsets.all(24),
+        child: Column(
+          mainAxisSize: MainAxisSize.min,
+          crossAxisAlignment: CrossAxisAlignment.start,
+          children: [
+            Text(
+              'Applicant Profile',
+              style: TextStyle(
+                fontSize: 20,
+                fontWeight: FontWeight.bold,
+              ),
             ),
-          ),
-          SizedBox(height: 14),
-          Text('Student ABC'),
-          Text('ST Student • MCA'),
-          Text('Student ID: STSETU-2026-10482'),
-          Text('Institution: KIPM College of Management'),
-          Text('State: Uttar Pradesh'),
-          SizedBox(height: 10),
-          Chip(
-            avatar: Icon(Icons.check_circle, size: 15),
-            label: Text('Profile verified'),
-          ),
-        ],
-      ),
-    ),
+
+            SizedBox(height: 14),
+
+            Text('Student ABC'),
+
+            Text('ST Student • MCA'),
+
+            Text(
+              'Student ID: STSETU-2026-10482',
+            ),
+
+            Text(
+              'Institution: KIPM College of Management',
+            ),
+
+            Text(
+              'State: Uttar Pradesh',
+            ),
+
+            SizedBox(height: 10),
+
+            Chip(
+              avatar: Icon(
+                Icons.check_circle,
+                size: 15,
+              ),
+              label: Text(
+                'Profile verified',
+              ),
+            ),
+          ],
+        ),
+      );
+    },
   );
 }
