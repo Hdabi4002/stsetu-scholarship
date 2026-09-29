@@ -528,7 +528,7 @@ class SchemesPage extends StatelessWidget {
           (scheme) => Card(
             child: ListTile(
               leading: CircleAvatar(
-                backgroundColor: navy.withOpacity(0.08),
+                backgroundColor: navy.withValues(alpha: 0.08),
                 child: const Icon(
                   Icons.school_outlined,
                   color: navy,
@@ -599,7 +599,7 @@ void showEligibility(
             Container(
               padding: const EdgeInsets.all(14),
               decoration: BoxDecoration(
-                color: green.withOpacity(0.1),
+                color: green.withValues(alpha: 0.1),
                 borderRadius: BorderRadius.circular(14),
               ),
               child: const Row(
