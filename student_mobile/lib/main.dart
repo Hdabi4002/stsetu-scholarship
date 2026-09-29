@@ -41,7 +41,7 @@ class _ShellState extends State<Shell> {
  @override Widget build(BuildContext context)=>Scaffold(appBar:AppBar(title:Row(children:[Container(width:34,height:34,decoration:BoxDecoration(color:navy,borderRadius:BorderRadius.circular(10)),child:const Icon(Icons.shield_outlined,color:Colors.white,size:21)),const SizedBox(width:10),const Text('STSetu',style:TextStyle(fontWeight:FontWeight.w800))]),actions:[IconButton(onPressed:()=>showJago(context),icon:const Icon(Icons.auto_awesome)),IconButton(onPressed:()=>showProfile(context),icon:const Icon(Icons.person_outline))]),body:pages[index],bottomNavigationBar:NavigationBar(selectedIndex:index,onDestinationSelected:(v)=>setState(()=>index=v),destinations:const [NavigationDestination(icon:Icon(Icons.home_outlined),label:'Home'),NavigationDestination(icon:Icon(Icons.school_outlined),label:'Schemes'),NavigationDestination(icon:Icon(Icons.track_changes),label:'Track'),NavigationDestination(icon:Icon(Icons.folder_outlined),label:'Documents'),NavigationDestination(icon:Icon(Icons.account_balance_wallet_outlined),label:'DBT')]));
 }
 
-class DashboardPage extends StatelessWidget { const DashboardPage({super.key}); @override Widget build(BuildContext c)=>ListView(padding:const EdgeInsets.all(16),children:[Container(padding:const EdgeInsets.all(20),decoration:BoxDecoration(color:navy,borderRadius:BorderRadius.circular(24)),child:const Column(crossAxisAlignment:CrossAxisAlignment.start,children:[Text('STUDENT DASHBOARD',style:TextStyle(color:Colors.white70,fontSize:11,fontWeight:FontWeight.bold)),SizedBox(height:8),Text('Welcome, Habibah 👋',style:TextStyle(color:Colors.white,fontSize:24,fontWeight:FontWeight.w800)),SizedBox(height:8),Text('Discover schemes, check eligibility, verify documents and track your scholarship journey.',style:TextStyle(color:Colors.white70,height:1.4))]),),const SizedBox(height:16),Row(children:[metric('5','Schemes'),metric('1','Application'),metric('3/3','Docs')]),const SizedBox(height:18),section('Application status'),Card(child:Padding(padding:const EdgeInsets.all(18),child:Column(children:[status('Application Submitted',true),status('Document Verification',true),status('Institute / State Verification',false,current:true),status('Sanction & DBT',false)]))),const SizedBox(height:18),section('Quick services'),GridView.count(crossAxisCount:2,shrinkWrap:true,physics:const NeverScrollableScrollPhysics(),crossAxisSpacing:10,mainAxisSpacing:10,children:[quick(Icons.verified_user_outlined,'Check Eligibility'),quick(Icons.folder_shared_outlined,'Document Wallet'),quick(Icons.notifications_none,'Notifications'),quick(Icons.smart_toy_outlined,'JAGO AI')])]); }
+class DashboardPage extends StatelessWidget { const DashboardPage({super.key}); @override Widget build(BuildContext c)=>ListView(padding:const EdgeInsets.all(16),children:[Container(padding:const EdgeInsets.all(20),decoration:BoxDecoration(color:navy,borderRadius:BorderRadius.circular(24)),child:const Column(crossAxisAlignment:CrossAxisAlignment.start,children:[Text('STUDENT DASHBOARD',style:TextStyle(color:Colors.white70,fontSize:11,fontWeight:FontWeight.bold)),SizedBox(height:8),Text('Welcome, Student ABC 👋',style:TextStyle(color:Colors.white,fontSize:24,fontWeight:FontWeight.w800)),SizedBox(height:8),Text('Discover schemes, check eligibility, verify documents and track your scholarship journey.',style:TextStyle(color:Colors.white70,height:1.4))]),),const SizedBox(height:16),Row(children:[metric('5','Schemes'),metric('1','Application'),metric('3/3','Docs')]),const SizedBox(height:18),section('Application status'),Card(child:Padding(padding:const EdgeInsets.all(18),child:Column(children:[status('Application Submitted',true),status('Document Verification',true),status('Institute / State Verification',false,current:true),status('Sanction & DBT',false)]))),const SizedBox(height:18),section('Quick services'),GridView.count(crossAxisCount:2,shrinkWrap:true,physics:const NeverScrollableScrollPhysics(),crossAxisSpacing:10,mainAxisSpacing:10,children:[quick(Icons.verified_user_outlined,'Check Eligibility'),quick(Icons.folder_shared_outlined,'Document Wallet'),quick(Icons.notifications_none,'Notifications'),quick(Icons.smart_toy_outlined,'JAGO AI')])]); }
 }
 Widget metric(String n,String l)=>Expanded(child:Card(child:Padding(padding:const EdgeInsets.symmetric(vertical:16),child:Column(children:[Text(n,style:const TextStyle(fontSize:20,fontWeight:FontWeight.bold,color:navy)),Text(l,style:const TextStyle(fontSize:11,color:Colors.black54))]))));
 Widget section(String s)=>Padding(padding:const EdgeInsets.only(bottom:8),child:Text(s,style:const TextStyle(fontSize:17,fontWeight:FontWeight.bold)));
@@ -56,4 +56,34 @@ class ApplicationsPage extends StatelessWidget { const ApplicationsPage({super.k
 class DocumentsPage extends StatelessWidget { const DocumentsPage({super.key}); @override Widget build(BuildContext c)=>ListView(padding:const EdgeInsets.all(16),children:[section('Document Wallet'),const Text('Verified documents and DigiLocker demo integration.',style:TextStyle(color:Colors.black54)),const SizedBox(height:12),...['ST Certificate','Income Certificate','Marksheet'].map((d)=>Card(child:ListTile(leading:const Icon(Icons.description_outlined,color:navy),title:Text(d),subtitle:const Text('Verified • Demo document'),trailing:const Icon(Icons.verified,color:green)))),Card(child:ListTile(leading:const Icon(Icons.cloud_outlined,color:green),title:const Text('Connect DigiLocker',style:TextStyle(fontWeight:FontWeight.bold)),subtitle:const Text('Mock gateway for SIH demonstration'),onTap:()=>showDialog(context:c,builder:(_)=>AlertDialog(title:const Text('DigiLocker'),content:const Text('Demo verification completed. No live government service is connected.'),actions:[TextButton(onPressed:()=>Navigator.pop(c),child:const Text('Done'))]))))]); }
 class PaymentsPage extends StatelessWidget { const PaymentsPage({super.key}); @override Widget build(BuildContext c)=>ListView(padding:const EdgeInsets.all(16),children:[section('Payment Tracker • DBT'),Card(child:Padding(padding:const EdgeInsets.all(20),child:Column(crossAxisAlignment:CrossAxisAlignment.start,children:[const Text('Post-Matric Scholarship',style:TextStyle(color:Colors.black54)),const SizedBox(height:4),const Text('₹48,000',style:TextStyle(fontSize:30,fontWeight:FontWeight.w800,color:navy)),const Text('Demo annual support'),const SizedBox(height:12),const Chip(avatar:Icon(Icons.schedule,size:15),label:Text('DBT Processing')),const Divider(height:28),const Text('Destination account  XXXX XXXX 4821'),const SizedBox(height:8),status('Sanction generated',true),status('PFMS / DBT validation',true),status('Payment processing',false,current:true),status('Credit to student',false)])))]); }
 void showJago(BuildContext c)=>showDialog(context:c,builder:(_)=>AlertDialog(title:const Text('JAGO AI'),content:const Text('Namaste! I can guide you on scholarship schemes, eligibility, required documents, application stages and DBT status.\n\nDemo answer: Based on the profile, Post-Matric Scholarship is available for an eligibility check.'),actions:[TextButton(onPressed:()=>Navigator.pop(c),child:const Text('Close'))]));
-void showProfile(BuildContext c)=>showModalBottomSheet(context:c,showDragHandle:true,builder:(_)=>const Padding(padding:EdgeInsets.all(24),child:Column(mainAxisSize:MainAxisSize.min,crossAxisAlignment:CrossAxisAlignment.start,children:[Text('Applicant Profile',style:TextStyle(fontSize:20,fontWeight:FontWeight.bold)),SizedBox(height:14),Text('Habibah Qamar'),Text('ST Student • MCA'),Text('Student ID: STSETU-2026-10482'),Text('Institution: KIPM College of Management'),Text('State: Uttar Pradesh'),SizedBox(height:10),Chip(avatar:Icon(Icons.check_circle,size:15),label:Text('Profile verified'))]));
+void showProfile(BuildContext c) => showModalBottomSheet(
+  context: c,
+  showDragHandle: true,
+  builder: (_) => const Padding(
+    padding: EdgeInsets.all(24),
+    child: Column(
+      mainAxisSize: MainAxisSize.min,
+      crossAxisAlignment: CrossAxisAlignment.start,
+      children: [
+        Text(
+          'Applicant Profile',
+          style: TextStyle(
+            fontSize: 20,
+            fontWeight: FontWeight.bold,
+          ),
+        ),
+        SizedBox(height: 14),
+        Text('Student ABC'),
+        Text('ST Student • MCA'),
+        Text('Student ID: STSETU-2026-10482'),
+        Text('Institution: KIPM College of Management'),
+        Text('State: Uttar Pradesh'),
+        SizedBox(height: 10),
+        Chip(
+          avatar: Icon(Icons.check_circle, size: 15),
+          label: Text('Profile verified'),
+        ),
+      ],
+    ),
+  ),
+);
